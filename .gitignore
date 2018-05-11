@@ -27,3 +27,6 @@ typings/
 
 # Optional eslint cache
 .eslintcache
+
+# Visual Studio local settings
+.vs
