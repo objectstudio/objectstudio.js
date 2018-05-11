@@ -1,8 +1,30 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { CacheService } from './cache/cache.service';
 import { LogService } from './logging/log.service';
 import { AlertsService } from './alerts/alerts.service';
-import { Core } from './core';
+
+/*
+=========================================
+= Define Service for convenient access
+=========================================
+*/
+
+@Injectable()
+export class Core
+{
+	constructor(public log: LogService,
+		public cache: CacheService,
+		public alerts: AlertsService)
+	{
+
+	}
+}
+
+/*
+=========================================
+= Define Angular Module
+=========================================
+*/
 
 @NgModule({
      declarations: [
@@ -21,4 +43,14 @@ import { Core } from './core';
           AlertsService
      ]
 })
-export class FrameworkModule { }
+export class CoreModule { }
+
+/*
+=========================================
+= Export Full Library API to package consumers
+=========================================
+*/
+
+export * from './alerts';
+export * from './cache';
+export * from './logging';

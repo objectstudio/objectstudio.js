@@ -13,7 +13,6 @@ bower_components
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
-dist/
 
 # Dependency directories
 node_modules/
@@ -30,3 +29,4 @@ typings/
 
 # Visual Studio local settings
 .vs
+/packages/core/dist
