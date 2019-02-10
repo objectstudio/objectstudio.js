@@ -10,14 +10,11 @@ import { AlertsService } from './alerts/alerts.service';
 */
 
 @Injectable()
-export class Core
-{
-	constructor(public log: LogService,
-		public cache: CacheService,
-		public alerts: AlertsService)
-	{
-
-	}
+export class Core {
+    constructor(public log: LogService,
+        public cache: CacheService,
+        public alerts: AlertsService) {
+    }
 }
 
 /*
@@ -54,3 +51,5 @@ export class CoreModule { }
 export * from './alerts';
 export * from './cache';
 export * from './logging';
+export * from './api';
+export * from './result';

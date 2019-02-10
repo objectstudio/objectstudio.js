@@ -19,7 +19,7 @@ export declare class CacheService {
      * Perform operations on start of a new session.
      * @param purgeStaleSessionItems
      */
-    private processNewSession(purgeStaleSessionItems);
+    private processNewSession;
     /**
      * Get an item from the store.
      * @param key
@@ -140,7 +140,7 @@ export declare enum CachePolicy {
     Session = 1,
     User = 2,
     SessionOnly = 3,
-    Permanent = 4,
+    Permanent = 4
 }
 export interface ICacheProvider {
     init(options: CacheInitializationOptions): Promise<ICacheProvider>;

@@ -2,7 +2,7 @@ import { ICacheProvider, CacheItem, CacheInitializationOptions } from "./cache.s
 export declare class InMemoryCacheProvider implements ICacheProvider {
     private store;
     init(options: CacheInitializationOptions): Promise<ICacheProvider>;
-    private performGet(key);
+    private performGet;
     get(key: string): Promise<CacheItem>;
     getAll(filter?: string): Promise<CacheItem[]>;
     set(key: string, item: CacheItem): Promise<void>;

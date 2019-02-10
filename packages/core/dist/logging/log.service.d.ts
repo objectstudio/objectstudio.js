@@ -2,7 +2,7 @@ export declare class LogService {
     providers: ILogProvider[];
     register(provider: ILogProvider): void;
     registerConsole(): void;
-    private write(level, args);
+    private write;
     assert(...args: any[]): void;
     error(...args: any[]): void;
     group(...args: any[]): void;

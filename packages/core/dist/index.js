@@ -63,4 +63,6 @@ export { CoreModule };
 export * from './alerts';
 export * from './cache';
 export * from './logging';
+export * from './api';
+export * from './result';
 //# sourceMappingURL=index.js.map

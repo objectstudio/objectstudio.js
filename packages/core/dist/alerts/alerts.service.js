@@ -7,27 +7,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Injectable } from "@angular/core";
-import { Subject } from "rxjs/Subject";
-import { LogService } from "../logging/log.service";
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+import { LogService } from '../logging/log.service';
 var AlertsService = /** @class */ (function () {
     function AlertsService(log) {
         this.log = log;
-        this.alertOccured = new Subject();
+        this.onAlert = new Subject();
         this.loggingEnabled = true;
         this.alerts = [];
     }
     AlertsService.prototype.error = function (code, message, details) {
         // set the message to the code if no message is provided
-        if (!message && code)
+        if (!message && code) {
             message = code;
+        }
         return this.push(AlertLevel.Error, code, message, details);
     };
     AlertsService.prototype.warn = function (message) {
-        return this.push(AlertLevel.Warn, "WARNING", message, []);
+        return this.push(AlertLevel.Warn, 'WARNING', message, []);
     };
     AlertsService.prototype.success = function (message) {
-        return this.push(AlertLevel.Success, "SUCCESS", message, []);
+        return this.push(AlertLevel.Success, 'SUCCESS', message, []);
     };
     AlertsService.prototype.push = function (level, code, message, details) {
         var alert = new Alert();
@@ -40,39 +41,50 @@ var AlertsService = /** @class */ (function () {
         // add it to the alert stack
         this.alerts.push(alert);
         // raise the alert occured event.
-        this.alertOccured.next(alert);
+        this.onAlert.next(alert);
         return alert;
     };
     AlertsService.prototype.logAlert = function (alert) {
         if (this.loggingEnabled) {
-            var message = alert.level + "] ";
-            message += alert.message;
-            // determine the log function
-            var logFunction = this.log.error;
-            if (alert.level == AlertLevel.Warn)
-                logFunction = this.log.warn;
-            else if (alert.level == AlertLevel.Success)
-                logFunction = this.log.info;
-            // log the message
-            logFunction(message);
+            var message = alert.level.toString() + "] " + alert.code + "] " + alert.message;
+            if (alert.level === AlertLevel.Warn) {
+                this.log.warn(message);
+            }
+            else if (alert.level === AlertLevel.Success) {
+                this.log.info(message);
+            }
+            else {
+                this.log.error(message);
+            }
             if (alert.details && alert.details.length) {
                 for (var _i = 0, _a = alert.details; _i < _a.length; _i++) {
                     var detail = _a[_i];
-                    logFunction(detail);
+                    var detailMessage = alert.level.toString() + " DETAILS] " + detail;
+                    if (alert.level === AlertLevel.Warn) {
+                        this.log.warn(detailMessage);
+                    }
+                    else if (alert.level === AlertLevel.Success) {
+                        this.log.info(detailMessage);
+                    }
+                    else {
+                        this.log.error(detailMessage);
+                    }
                 }
             }
         }
     };
     AlertsService.prototype.hasAny = function () {
-        if (this.alerts.length > 0)
+        if (this.alerts.length > 0) {
             return true;
+        }
         return false;
     };
     AlertsService.prototype.dismiss = function (alert) {
         if (alert && this.alerts) {
             var index = this.alerts.indexOf(alert);
-            if (index > -1)
+            if (index > -1) {
                 this.alerts.splice(index, 1);
+            }
         }
         else {
             this.alerts = new Array();
@@ -94,8 +106,8 @@ var Alert = /** @class */ (function () {
 export { Alert };
 export var AlertLevel;
 (function (AlertLevel) {
-    AlertLevel[AlertLevel["Error"] = 0] = "Error";
-    AlertLevel[AlertLevel["Warn"] = 1] = "Warn";
-    AlertLevel[AlertLevel["Success"] = 2] = "Success";
+    AlertLevel["Error"] = "ERROR";
+    AlertLevel["Warn"] = "WARN";
+    AlertLevel["Success"] = "SUCCESS";
 })(AlertLevel || (AlertLevel = {}));
 //# sourceMappingURL=alerts.service.js.map

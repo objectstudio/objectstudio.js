@@ -328,12 +328,12 @@ var CacheService = /** @class */ (function () {
     CacheService.createSessionID = function () {
         return uuid();
     };
+    var CacheService_1;
     CacheService = CacheService_1 = __decorate([
         Injectable(),
         __metadata("design:paramtypes", [LogService])
     ], CacheService);
     return CacheService;
-    var CacheService_1;
 }());
 export { CacheService };
 var CacheInitializationOptions = /** @class */ (function () {

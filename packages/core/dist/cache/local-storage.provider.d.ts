@@ -8,16 +8,16 @@ export declare class LocalStorageCacheProvider implements ICacheProvider {
      */
     constructor(log: LogService);
     init(options: CacheInitializationOptions): Promise<ICacheProvider>;
-    private key(key);
+    private key;
     get(key: string): Promise<CacheItem>;
-    private performGet(key);
+    private performGet;
     getAll(filter?: string): Promise<CacheItem[]>;
-    private getAllKeys(filter?);
+    private getAllKeys;
     set(key: string, item: CacheItem): Promise<void>;
-    private performSet(key, item, attempt);
-    private isQuotaExceeded(e);
-    private ageOffLeastAccessed(percentageToRemove);
-    private getLastAccessed(item);
+    private performSet;
+    private isQuotaExceeded;
+    private ageOffLeastAccessed;
+    private getLastAccessed;
     remove(key: string): Promise<void>;
     clear(): Promise<void>;
 }
